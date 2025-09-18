@@ -3,6 +3,7 @@ html, body {
     width: 100%;
     margin: 0;
     padding: 0;
+    overflow:hidden;
 }
 
 body {
@@ -25,6 +26,7 @@ body {
 #wordDisplay span {
     display: inline-block;
     transition: color 0.2s;
+    user-select: none;
 }
 
 #typeWrite {
