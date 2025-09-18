@@ -1,0 +1,59 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height:100dvh;
+    background: linear-gradient(45deg, #000000, #130F40 80%) no-repeat;
+    background-size: cover;
+}
+
+#wordDisplay {
+    font-size: clamp(1rem, 2vw, 2rem);
+    margin-bottom: 2vh;
+    letter-spacing: 0.1em;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+#wordDisplay span {
+    display: inline-block;
+    transition: color 0.2s;
+}
+
+#typeWrite {
+    display: inline-block;
+    width: 0.15em;
+    background: rgb(255, 213, 28);
+    position: absolute;
+    animation: blink 1s infinite;
+    transition: left 0.1s ease;
+}
+
+@keyframes blink {
+    0% {opacity: 1;}
+    50% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.correct {
+    color: rgb(255, 255, 255);
+}
+
+.incorrect {
+    color: red;
+}
+
+.pending {
+    color: rgb(117, 117, 117);
+}
+
+.locked {
+    color: rgb(65, 65, 65) !important;
+}

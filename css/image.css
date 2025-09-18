@@ -1,0 +1,64 @@
+.tennis {
+    position: relative;
+    left:30%;
+    width: 500px;
+    height: 500px;
+    transform: translate(-30%, -15%);
+}
+
+.cat {
+    position: absolute;
+    bottom: 0;
+    left: 50px;
+}
+
+.racquet {
+    position: absolute;
+    bottom: 80px;
+    left:-10px;
+    transform-origin: bottom left;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease-in-out;
+}
+
+@keyframes swing {
+    0% {transform: rotate(0deg);}
+    50% {transform: rotate(-60deg);}
+    100% {transform: rotate(0deg);}
+}
+
+.ball{
+    position:absolute;
+    width:100px;
+    height:100px;
+    top:20px;
+    left:260px;
+    
+}
+
+@keyframes ball-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes ball-big {
+    0% {
+        transform: scale(0.8) translateY(10px);
+    }
+    100% {
+        transform: scale(4.0) translateY(40px);
+    }
+}
+
+@keyframes ball-return {
+    0% {
+        transform: scale(4.0) translateY(40px);
+    }
+    100% {
+        transform: scale(0.8) translateY(10px);
+    }
+}
