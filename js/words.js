@@ -108,6 +108,7 @@ async function handleKey(e) {
             ballBig();
         } else {
             ballReturn();
+            stopCountDown();
         }
     }
 }

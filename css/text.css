@@ -59,3 +59,10 @@ body {
 .locked {
     color: rgb(65, 65, 65) !important;
 }
+
+.countdown {
+    position:absolute;
+    color: white;
+    top:-0.5%;
+    left:33%;
+}

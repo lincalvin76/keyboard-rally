@@ -23,8 +23,42 @@ function spinBall() {
     ball.style.animation = 'ball-spin 2s linear infinite'
 }
 
+let intervalId;
+
+function countDown(time) {
+    let remain = time;
+
+    const display = document.createElement("h1");
+    display.classList.add("countdown")
+    display.id = "countdown";
+    display.textContent = remain;
+
+    document.getElementById("ball-wrap").appendChild(display);
+
+    intervalId = setInterval(() => {
+        remain--;
+
+        if (remain >= 0) {
+            display.textContent = remain;
+        } else {
+            clearInterval(intervalId);
+            // Ran out of time;
+            console.log("ran out of time")
+        }
+    }, 1000);
+}
+
+function stopCountDown() {
+    clearInterval(intervalId);
+    const display = document.getElementById("countdown");
+    if (display) {
+        display.remove();
+    }
+}
+
 const ballWrap = document.getElementById('ball-wrap');
-const duration = 2000;
+const ball = document.getElementById('ball');
+const duration = 1500;
 let ready = true;
 
 function ballBig() {
@@ -38,6 +72,7 @@ function ballBig() {
             ballWrap.removeEventListener("animationend", ballBigEnd);
             window.locked = false;
             lockWord();
+            countDown(5);
         }
     }
 

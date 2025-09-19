@@ -1,23 +1,18 @@
 .tennis {
-    position: relative;
-    left:30%;
     width: 500px;
     height: 500px;
-    transform: translate(-30%, -15%);
     user-select: none;
+    position:absolute;
 }
 
 .cat {
-    position: absolute;
-    bottom: 0;
-    left: 50px;
     user-select: none;
 }
 
 .racquet {
-    position: absolute;
-    bottom: 80px;
-    left:-10px;
+    position:absolute;
+    top:-20%;
+    left:-10%;
     transform-origin: bottom left;
     transform: rotate(0deg);
     transition: transform 0.3s ease-in-out;
@@ -30,13 +25,11 @@
     100% {transform: rotate(0deg);}
 }
 
-.ball{
-    position:absolute;
-    width:100px;
-    height:100px;
-    top:20px;
-    left:260px;
-    user-select: none;
+.ball-wrap {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    top:0%;
 }
 
 @keyframes ball-spin {
@@ -48,20 +41,30 @@
     }
 }
 
+.ball{
+    position:absolute;
+    width:6.25em;
+    height:6.25em;
+    top:-5%;
+    left:25%;
+    user-select: none;
+}
+
 @keyframes ball-big {
     0% {
-        transform: scale(0.8) translateY(10px);
+        transform: scale(0.8);
     }
     100% {
-        transform: scale(4.0) translateY(40px);
+        transform: scale(4.0) translateY(16em) translateX(5em);
     }
 }
 
 @keyframes ball-return {
     0% {
-        transform: scale(4.0) translateY(40px);
+        transform: scale(4.0) translateY(16em) translateX(5em);
     }
+
     100% {
-        transform: scale(0.8) translateY(10px);
+        transform: scale(0.8);
     }
 }
