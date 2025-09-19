@@ -7,7 +7,14 @@ function lockWord() {
             span.classList.add("locked");
         }
     });
+}
 
+function resetBall() {
+    const ball = document.getElementById('ball');
+    ball.style.animation = 'none';
+    ballWrap.style.animation ='none';
+    ballWrap.style.transform = "scale(0.8) translate(0em, -4em)";
+    bigBall = false;
 }
 
 function racquetAnimate() {
@@ -44,6 +51,10 @@ function countDown(time) {
             clearInterval(intervalId);
             // Ran out of time;
             console.log("ran out of time")
+            resetBall();
+            resetStats();
+            stopCountDown();
+            resetTypingtest();
         }
     }, 1000);
 }
@@ -64,15 +75,17 @@ let ready = true;
 function ballBig() {
     ready = false;
     stopBall()
-    window.locked = true;
+    locked = true;
 
     function ballBigEnd(event) {
          if (event.animationName === "ball-big") {
             ready = true;
             ballWrap.removeEventListener("animationend", ballBigEnd);
-            window.locked = false;
+            locked = false;
             lockWord();
             countDown(5);
+            startTime = null;
+            typedChars = 0;
         }
     }
 
@@ -85,7 +98,7 @@ function ballReturn() {
     if(ready) {
         ready = false;
         stopBall()
-        window.locked = true;
+        locked = true;
 
         function onReturnEnd(event) {
             if (event.animationName === "ball-return") {

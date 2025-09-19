@@ -3,7 +3,7 @@ let currentWord = "";
 let typed = "";
 let bigBall = false;
 let start = true;
-window.locked = false;
+let locked = false;
 
 const wordDisplay = document.getElementById("wordDisplay");
 
@@ -40,7 +40,7 @@ async function getRandomWord() {
 }
 
 async function showWord() {
-    currentWord = start ? "Type to start!" : await getRandomWord();
+    currentWord = start ? "Type this to start!" : await getRandomWord();
     start = false;
     wordDisplay.innerHTML= "";
     typed = "";
@@ -91,17 +91,27 @@ function updateTypeLoc() {
     }
 }
 
+let startTime = null;
+let typedChars = 0;
+
 async function handleKey(e) {
+
+    if (!startTime && e.key.length === 1) {
+        startTime = Date.now();
+    }
+
     if (e.key === "Backspace") {
         typed = typed.slice(0, -1);
     } else if (e.key.length === 1 && typed.length < currentWord.length && !locked) {
         typed += e.key;
+        typedChars++;
     }
 
     updateDisplay();
 
     if (typed === currentWord) {
         showWord();
+
         if (!bigBall) {
             bigBall = true;
             spinBall();
@@ -109,12 +119,16 @@ async function handleKey(e) {
         } else {
             ballReturn();
             stopCountDown();
+            addScore();
+            setWPM();
+            setAcc(currentWord)
         }
     }
 }
 
 function resetTypingtest() {
     usedWords.clear();
+    start = true;
     showWord();
 }
 

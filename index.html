@@ -10,18 +10,26 @@
 </head>
 <body>
     <h1 style="color:white">Welcome to stupid tennis cat guy</h1>
-    <div id = "wordDisplay"></div>
-    <br>
-    <div class="tennis position-absolute start-50 translate-middle-x" style="top:25%">
+    <div class="tennis position-absolute start-50 translate-middle-x" style="top:15%">
         <img src="images/cat.png" class="cat" id="cat" draggable="false">
         <img src="images/racquet.png" class="racquet" id="racquet" draggable="false">
         <div class="ball-wrap" id="ball-wrap">
             <img src="images/ball.png" class="ball" id="ball" draggable="false">
         </div>
     </div>
+    <div class="position-absolute start-50 w-50 h-25 translate-middle bg-dark text-dark-emphasis rounded border border-warning" style="bottom:-6em">
+        <div id = "wordDisplay" class="p-2 px-5 mb-1 mt-5 w-100 text-center position-absolute top-0"></div>
+        <div id = "statsDisplay" class="h-75 bottom-0 d-flex justify-content-center gap-5" style="margin-top: 8em">
+            <div class="user-select-none fs-4" style="height:0">WPM: <span id="wpm">0</span></div>
+            <div class="user-select-none fs-4" style="height:0">Accuracy: <span id="acc">0</span></div>
+            <div class="user-select-none fs-4" style="height:0">Score: <span id="score">0</span></div>
+        </div>
+    </div>
+
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+<script src="js/stats.js"></script>
 <script src="js/tennis-cat.js"></script>
 <script src="js/words.js"></script>
 </html>
