@@ -2,7 +2,7 @@
 <img width="1841" height="926" alt="image" src="https://github.com/user-attachments/assets/1ee49232-55b9-4815-b9c6-6d185d82a02a" />
 
 <h1><ins>About:</ins></h1>
-<p>This is a small little project created from an idea I thought of when I saw this cat playing tennis on tiktok and youtube shorts</p>
+<p>This is a small little project created from an idea I thought of when I saw this cat playing tennis on <a href="https://www.tiktok.com/search/video?q=cat%20playing%20tennis" target="_blank">tiktok</a> and <a href="https://www.youtube.com/shorts/GV6s4rU5ahk" target="_blank" >youtube shorts</a></p>
 <p>Instead of using the comment section on mobile to pretend to hit the ball back... Why not type out a random word to hit the ball instead!</p>
 <p>This was just a goofy little project that I might add some more details to if people like it enough</p>
 
