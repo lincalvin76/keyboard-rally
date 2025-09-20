@@ -6,12 +6,11 @@
 <p>Instead of using the comment section on mobile to pretend to hit the ball back... Why not type out a random word to hit the ball instead!</p>
 <p>This was just a goofy little project that I might add some more details to if people like it enough</p>
 
-
 <h1><ins>How to play:</ins></h1>
 <p>So since this is a typing game... you gotta type!</p>
 <p>To begin just follow instructions and type "Type this to start!"</p>
 <p>Afterwards you will need to continue typing to hit the ball back and forth!</p>
-<p style="color: rgb(16,16,16)">(Side note, you cannot type when the ball is flying towards the cat, only when it's your turn to swing)</p>
+<p>(Side note, you cannot type when the ball is flying towards the cat, only when it's your turn to swing)</p>
 
 <h1><ins>Tools Used:</ins></h1>
 <img align="left" alt="HTML" width="50px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" />
@@ -20,7 +19,6 @@
 <img align="left" alt="BootStrap" width="50px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" />
 <br><br><br>
 <p>Data Muse API for random word generation</p>
-<br>
 
 <h1><ins>Future Additions Maybe:</ins></h1>
 <ul>
