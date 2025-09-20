@@ -7,7 +7,7 @@
 <p>This was just a goofy little project that I might add some more details to if people like it enough</p>
 
 <h1><ins>How to play:</ins></h1>
-<p>So since this is a typing game... you gotta type! <a href="keyboard-rally.vercel.app">Website Here!</a></p>
+<p>So since this is a typing game... you gotta type! <a href="https://keyboard-rally.vercel.app">Website Here!</a></p>
 <p>To begin just follow instructions and type "Type this to start!"</p>
 <p>Afterwards you will need to continue typing to hit the ball back and forth!</p>
 <p>(Side note, you cannot type when the ball is flying towards the cat, only when it's your turn to swing)</p>
