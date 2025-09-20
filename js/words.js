@@ -123,10 +123,12 @@ async function handleKey(e) {
         showWord();
 
         if (!bigBall) {
+            catHit();
             bigBall = true;
             spinBall();
             ballBig();
         } else {
+            userHit();
             ballReturn();
             stopCountDown();
             addScore();

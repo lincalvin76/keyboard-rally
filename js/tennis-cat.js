@@ -18,13 +18,13 @@ function explosion() {
     tennis.insertBefore(explosion, tennis.firstChild);
 
     setTimeout(() => {
-        removeExplosion();
         resetBall();
         resetStats();
         stopCountDown();
         resetTypingtest();
         resetBallStats();
-    }, 2000)
+        removeExplosion();
+    }, 500)
 }
 
 function removeExplosion() {
@@ -45,6 +45,7 @@ function diffIncrease() {
         return;
     } else {
         duration = duration - 100;
+        speedUp();
     }
 }
 
@@ -75,7 +76,11 @@ function racquetAnimate() {
 }
 
 function spinBall() {
-    ball.style.animation = 'ball-spin 2s linear infinite'
+    ball.style.animation = 'ball-spin 2s linear infinite';
+}
+
+function stopSpin() {
+    ball.style.animation = 'none';
 }
 
 function countDown(time) {
@@ -96,7 +101,14 @@ function countDown(time) {
         } else {
             clearInterval(intervalId);
             // Ran out of time;
-            explosion();
+            stopSpin();
+            gameOver();
+
+            setTimeout(() => {
+                explosion();
+                explode();
+            }, 1000);
+
         }
     }, 1000);
 }
@@ -140,6 +152,7 @@ function ballReturn() {
         function onReturnEnd(event) {
             if (event.animationName === "ball-return") {
                 racquetAnimate()
+                catHit();
                 ballBig();
                 ballWrap.removeEventListener("animationend", onReturnEnd);
             }
