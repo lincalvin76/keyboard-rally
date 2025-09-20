@@ -11,6 +11,7 @@ const typeWriter = document.createElement("div");
 typeWriter.id = "typeWrite";
 wordDisplay.appendChild(typeWriter);
 
+
 function removeAccents(str) {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
 }
@@ -23,10 +24,19 @@ async function getRandomWord() {
         const res = await fetch(`https://api.datamuse.com/words?sp=${pattern}&max=999`);
         const data = await res.json();
 
+        const textFile = await fetch('nsfw_list.txt');
+        const text = await textFile.text();
+
+        const nsfwWords = new Set(
+            text.split('\n').map(w => w.trim().toLowerCase()).filter(Boolean)
+        );
+
+        const safeWords = data.map(w => w.word).filter(w => !nsfwWords.has(w.toLowerCase()));
+
         let word;
         let attempts = 0;
         do {
-            word = removeAccents(data[Math.floor(Math.random() * data.length)].word);
+            word = removeAccents(safeWords[Math.floor(Math.random() * safeWords.length)]);
             attempts++;
             if (attempts > 20) break;
         } while (usedWords.has(word));
@@ -122,6 +132,9 @@ async function handleKey(e) {
             addScore();
             setWPM();
             setAcc(currentWord)
+            if (score % 15 === 0) {
+                diffIncrease();
+            }
         }
     }
 }

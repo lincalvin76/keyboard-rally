@@ -1,3 +1,53 @@
+const ballWrap = document.getElementById('ball-wrap');
+const ball = document.getElementById('ball');
+let intervalId;
+let duration = 1500;
+let countTime = 5;
+let ready = true;
+
+function resetBallStats() {
+    duration = 1500;
+    countTime = 5;
+}
+
+function explosion() {
+    const tennis = document.getElementById('tennis');
+    let explosion = document.createElement('img');
+    explosion.src = "images/explosion.gif";
+    explosion.classList.add("position-absolute", "h-100", "w-100" ,"z-2");
+    tennis.insertBefore(explosion, tennis.firstChild);
+
+    setTimeout(() => {
+        removeExplosion();
+        resetBall();
+        resetStats();
+        stopCountDown();
+        resetTypingtest();
+        resetBallStats();
+    }, 2000)
+}
+
+function removeExplosion() {
+    const tennis = document.getElementById('tennis');
+    const explosion = tennis.querySelector("img[src='images/explosion.gif']");
+    if (explosion) {
+        tennis.removeChild(explosion);
+    }
+}
+
+function diffIncrease() {
+    if (countTime <= 2) {
+        return;
+    } else {
+        countTime--
+    }
+    if (duration <= 500) {
+        return;
+    } else {
+        duration = duration - 100;
+    }
+}
+
 function lockWord() {
     const spans = wordDisplay.querySelectorAll("span");
     
@@ -10,7 +60,6 @@ function lockWord() {
 }
 
 function resetBall() {
-    const ball = document.getElementById('ball');
     ball.style.animation = 'none';
     ballWrap.style.animation ='none';
     ballWrap.style.transform = "scale(0.8) translate(0em, -4em)";
@@ -26,11 +75,8 @@ function racquetAnimate() {
 }
 
 function spinBall() {
-    const ball = document.getElementById('ball');
     ball.style.animation = 'ball-spin 2s linear infinite'
 }
-
-let intervalId;
 
 function countDown(time) {
     let remain = time;
@@ -50,11 +96,7 @@ function countDown(time) {
         } else {
             clearInterval(intervalId);
             // Ran out of time;
-            console.log("ran out of time")
-            resetBall();
-            resetStats();
-            stopCountDown();
-            resetTypingtest();
+            explosion();
         }
     }, 1000);
 }
@@ -67,11 +109,6 @@ function stopCountDown() {
     }
 }
 
-const ballWrap = document.getElementById('ball-wrap');
-const ball = document.getElementById('ball');
-const duration = 1500;
-let ready = true;
-
 function ballBig() {
     ready = false;
     stopBall()
@@ -83,7 +120,7 @@ function ballBig() {
             ballWrap.removeEventListener("animationend", ballBigEnd);
             locked = false;
             lockWord();
-            countDown(5);
+            countDown(countTime);
             startTime = null;
             typedChars = 0;
         }
