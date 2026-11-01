@@ -41,14 +41,38 @@ function updateBallTarget() {
     tennis.style.setProperty('--ball-dy', dy + 'px');
 }
 
-window.addEventListener('resize', updateBallTarget);
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateBallTarget);
+function scheduleBallUpdate() {
+    requestAnimationFrame(updateBallTarget); 
+}
+
+window.addEventListener('resize', scheduleBallUpdate);
+if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', scheduleBallUpdate);
+}
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(scheduleBallUpdate);
+
+if ('ResizeObserver' in window) {
+    const ro = new ResizeObserver(scheduleBallUpdate);
+    ['.typing-panel', '#tennis', 'main', 'header'].forEach((sel) => {
+        const el = document.querySelector(sel);
+        if (el) ro.observe(el);
+    });
+}
+
 updateBallTarget();
 
 function focusTyping() {
-    if (mobileInput) mobileInput.focus({ preventScroll: true });
+    if (mobileInput && document.activeElement !== mobileInput) {
+        mobileInput.focus({ preventScroll: true });
+    }
 }
-document.addEventListener('pointerdown', focusTyping);
+
+document.addEventListener('click', focusTyping);
+
+document.addEventListener('mousedown', (e) => {
+    if (!e.target.closest('a')) e.preventDefault();
+});
+
 if (mobileInput) {
     mobileInput.addEventListener('input', () => { mobileInput.value = ''; });
 }
