@@ -1,0 +1,28 @@
+.app {
+    height: 100vh;
+    height: 100dvh;
+}
+
+main { min-height: 0; }
+
+.title {
+    color: white;
+    font-size: clamp(1.5rem, 4vw + 0.5rem, 3rem);
+}
+.accent { color: rgb(117, 255, 179); }
+
+.typing-panel { width: min(92%, 800px); }
+.stats { font-size: clamp(1rem, 2.5vw, 1.5rem); }
+.gh-icon { height: 2rem; }
+
+#mobileInput { font-size: 16px; }
+
+@media (max-width: 576px) {
+    .typing-panel { padding: 0.75rem !important; }
+}
+
+@media (max-height: 500px) {
+    .tennis { --size: min(500px, 92vw, 32dvh); }
+    .title { font-size: 1.25rem; }
+    .gh-wrap { display: none; }
+}

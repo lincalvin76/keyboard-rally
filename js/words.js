@@ -52,7 +52,7 @@ async function getRandomWord() {
 async function showWord() {
     currentWord = start ? "Type this to start!" : await getRandomWord();
     start = false;
-    wordDisplay.innerHTML= "";
+    wordDisplay.innerHTML = "";
     typed = "";
 
     for (let char of currentWord) {
@@ -65,7 +65,6 @@ async function showWord() {
     wordDisplay.appendChild(typeWriter);
     lockWord();
     updateTypeLoc();
-
 }
 
 function updateDisplay() {
@@ -80,7 +79,6 @@ function updateDisplay() {
             span.classList.add("pending");
             lockWord();
         }
-
     });
 
     updateTypeLoc();
@@ -88,15 +86,19 @@ function updateDisplay() {
 
 function updateTypeLoc() {
     const spans = wordDisplay.querySelectorAll("span");
+    if (!spans.length) return;
+
     const currInd = typed.length;
 
     if (currInd < spans.length) {
         const span = spans[currInd];
-        typeWriter.style.left = (span.offsetLeft) + "px";
-        typeWriter.style.height = (span.offsetHeight) + "px";
+        typeWriter.style.left = span.offsetLeft + "px";
+        typeWriter.style.top = span.offsetTop + "px";
+        typeWriter.style.height = span.offsetHeight + "px";
     } else {
         const lastSpan = spans[spans.length - 1];
         typeWriter.style.left = (lastSpan.offsetLeft + lastSpan.offsetWidth) + "px";
+        typeWriter.style.top = lastSpan.offsetTop + "px";
         typeWriter.style.height = lastSpan.offsetHeight + "px";
     }
 }
@@ -104,16 +106,15 @@ function updateTypeLoc() {
 let startTime = null;
 let typedChars = 0;
 
-async function handleKey(e) {
-
-    if (!startTime && e.key.length === 1) {
+function processKey(key) {
+    if (!startTime && key.length === 1) {
         startTime = Date.now();
     }
 
-    if (e.key === "Backspace") {
+    if (key === "Backspace") {
         typed = typed.slice(0, -1);
-    } else if (e.key.length === 1 && typed.length < currentWord.length && !locked) {
-        typed += e.key;
+    } else if (key.length === 1 && typed.length < currentWord.length && !locked) {
+        typed += key;
         typedChars++;
     }
 
@@ -133,11 +134,28 @@ async function handleKey(e) {
             stopCountDown();
             addScore();
             setWPM();
-            setAcc(currentWord)
+            setAcc(currentWord);
             if (score % 15 === 0) {
                 diffIncrease();
             }
         }
+    }
+}
+
+function handleKey(e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+    if (e.key === "Backspace" || e.key.length === 1) {
+        e.preventDefault();   
+        processKey(e.key);
+    }
+}
+
+function handleMobileInput(e) {
+    if (e.inputType === "deleteContentBackward") {
+        processKey("Backspace");
+    } else if (e.data) {
+        for (const ch of e.data) processKey(ch);
     }
 }
 
@@ -148,5 +166,13 @@ function resetTypingtest() {
 }
 
 document.addEventListener("keydown", handleKey);
+
+const mobileInputEl = document.getElementById("mobileInput");
+if (mobileInputEl) mobileInputEl.addEventListener("input", handleMobileInput);
+
+window.addEventListener("resize", updateTypeLoc);
+if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(updateTypeLoc);   
+}
 
 showWord();

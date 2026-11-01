@@ -7,28 +7,24 @@
 }
 
 html, body {
-    height: 100%;
-    width: 100%;
     margin: 0;
     padding: 0;
-    overflow:hidden;
+    width: 100%;
+    overflow: hidden;
 }
 
 body {
-    min-height:100dvh;
+    min-height: 100dvh;
     background: linear-gradient(45deg, #000000, #130F40 80%) no-repeat;
     background-size: cover;
 }
 
 #wordDisplay {
-    font-size: clamp(2rem, 2vw, 2rem);
-    margin-bottom: 2vh;
+    position: relative;     
+    font-size: clamp(1.25rem, 4vw, 2rem);
     letter-spacing: 0.1em;
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
+    min-height: 2.5em;         
+    overflow-wrap: anywhere;
 }
 
 #wordDisplay span {
@@ -52,25 +48,19 @@ body {
     100% {opacity: 1;}
 }
 
-.correct {
-    color: rgb(255, 255, 255);
-}
-
-.incorrect {
-    color: red;
-}
-
-.pending {
-    color: rgb(117, 117, 117);
-}
-
-.locked {
-    color: rgb(65, 65, 65) !important;
-}
+.correct   { color: rgb(255, 255, 255); }
+.incorrect { color: red; }
+.pending   { color: rgb(117, 117, 117); }
+.locked    { color: rgb(65, 65, 65) !important; }
 
 .countdown {
-    position:absolute;
+    position: absolute;
+    left: calc(50% + (var(--racquet-cx, 35%) - 50%) / 0.8);
+    top: 5%;
+    transform: translate(-50%, -50%);
+    margin: 0;
     color: white;
-    top:-0.5%;
-    left:33%;
+    font-size: 2.5em;
+    line-height: 1;
+    pointer-events: none;  
 }
