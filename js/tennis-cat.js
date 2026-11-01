@@ -7,7 +7,7 @@ let countTime = 5;
 let ready = true;
 
 const MAX_SCALE = 4.0; 
-const MIN_SCALE = 1.0;   
+const MIN_SCALE = 0.8;   
 const BALL_GAP = 2;       
 const TITLE_GAP = 6;    
 
@@ -28,8 +28,9 @@ function updateBallTarget() {
     const bottomEdge = p.top - BALL_GAP;
     const topLimit = header ? header.getBoundingClientRect().bottom + TITLE_GAP : 0;
     const room = bottomEdge - topLimit;
-    const scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, room / ball.offsetHeight));
 
+    const fraction = Math.max(0.45, Math.min(1, room / 600));
+    const scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, (room * fraction) / ball.offsetHeight));
     const targetX = (p.left + p.width / 2) - box.left;
     const targetY = bottomEdge - box.top;
 
@@ -159,9 +160,11 @@ function countDown(time) {
     let remain = time;
 
     const display = document.createElement("h1");
-    display.classList.add("countdown")
+    display.classList.add("countdown");
     display.id = "countdown";
-    display.textContent = remain;
+    const num = document.createElement("span");
+    num.textContent = remain;
+    display.appendChild(num);
 
     document.getElementById("ball-wrap").appendChild(display);
 
@@ -169,7 +172,7 @@ function countDown(time) {
         remain--;
 
         if (remain >= 0) {
-            display.textContent = remain;
+            num.textContent = remain;
         } else {
             clearInterval(intervalId);
             // Ran out of time
